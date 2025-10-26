@@ -1,0 +1,22 @@
+# Docker Environment
+.env
+
+# Backend specific
+/backend/vendor/
+/backend/.env
+/backend/storage/logs/*
+/backend/storage/framework/cache/*
+/backend/storage/framework/sessions/*
+/backend/storage/framework/views/*
+
+# Frontend specific
+/frontend/node_modules/
+/frontend/dist/
+/frontend/.env.local
+
+# Build artifacts
+*.log
+*.pid
+*.seed
+*.pid.lock
+
