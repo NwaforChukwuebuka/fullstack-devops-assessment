@@ -29,12 +29,12 @@ RUN rm -rf ./*
 # Copy built assets from build stage
 COPY --from=build /app/dist .
 
-# Copy Nginx configuration template
-COPY nginx.conf /etc/nginx/templates/default.conf.template
+# Copy Nginx configuration
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 
-# Expose port from Railway
-EXPOSE $PORT
+# Expose port (Railway will provide this)
+EXPOSE 8080
 
-# Start Nginx - replace PORT placeholder with actual port
-CMD ["sh", "-c", "sed \"s/PORT/$PORT/g\" /etc/nginx/templates/default.conf.template > /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'"]
+# Start Nginx
+CMD ["nginx", "-g", "daemon off;"]
 
