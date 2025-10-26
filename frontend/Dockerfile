@@ -35,6 +35,6 @@ COPY nginx.conf /etc/nginx/templates/default.conf.template
 # Expose port from Railway
 EXPOSE $PORT
 
-# Start Nginx with dynamic port from Railway (replace __PORT__ with $PORT)
-CMD ["sh", "-c", "sed -i \"s/__PORT__/$$PORT/g\" /etc/nginx/templates/default.conf.template && cp /etc/nginx/templates/default.conf.template /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'"]
+# Start Nginx on dynamic port from Railway
+CMD ["sh", "-c", "sed -i \"s/listen 80;/listen $PORT;/g\" /etc/nginx/templates/default.conf.template && cp /etc/nginx/templates/default.conf.template /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'"]
 
