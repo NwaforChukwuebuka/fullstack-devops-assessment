@@ -35,8 +35,9 @@ COPY . .
 # Generate app key
 RUN php artisan key:generate --ansi || true
 
-# Set permissions
-RUN chmod -R 775 storage bootstrap/cache
+# Ensure required directories exist and set permissions
+RUN mkdir -p storage/framework/{cache,sessions,views} storage/logs bootstrap/cache \
+    && chmod -R 775 storage bootstrap/cache
 
 # Expose port
 EXPOSE $PORT
