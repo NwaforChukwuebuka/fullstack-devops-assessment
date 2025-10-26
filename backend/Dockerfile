@@ -23,21 +23,21 @@ RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
 # Get latest Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# Copy composer file first for dependency caching (avoid invalid lock in CI)
-COPY composer.json ./
+# Copy application files
+COPY . .
 
 # Install dependencies
 RUN composer install --no-dev --optimize-autoloader --no-interaction
 
-# Copy application files
-COPY . .
-
-# Generate app key
-RUN php artisan key:generate --ansi || true
+# Dump autoload to ensure all classes are registered
+RUN composer dump-autoload --optimize
 
 # Ensure required directories exist and set permissions
 RUN mkdir -p storage/framework/{cache,sessions,views} storage/logs bootstrap/cache \
     && chmod -R 775 storage bootstrap/cache
+
+# Generate app key
+RUN php artisan key:generate --ansi --force || true
 
 # Expose port
 EXPOSE $PORT
