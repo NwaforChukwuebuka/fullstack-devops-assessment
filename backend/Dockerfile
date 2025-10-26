@@ -1,8 +1,8 @@
-# PHP-FPM Dockerfile for Laravel
-FROM php:8.2-fpm
+# PHP Dockerfile for Laravel
+FROM php:8.2-cli
 
 # Set working directory
-WORKDIR /var/www/html
+WORKDIR /app
 
 # Install dependencies
 RUN apt-get update && apt-get install -y \
@@ -12,9 +12,7 @@ RUN apt-get update && apt-get install -y \
     libonig-dev \
     libxml2-dev \
     zip \
-    unzip \
-    nodejs \
-    npm
+    unzip
 
 # Clear cache
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
@@ -25,15 +23,24 @@ RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
 # Get latest Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# Copy existing application directory contents
-COPY . /var/www/html
+# Copy composer files first for dependency caching
+COPY composer.json composer.lock ./
 
-# Copy existing application directory permissions
-RUN chown -R www-data:www-data /var/www/html
+# Install dependencies
+RUN composer install --no-dev --optimize-autoloader --no-interaction
 
-# Change current user to www
-USER www-data
+# Copy application files
+COPY . .
 
-EXPOSE 9000
-CMD ["php-fpm"]
+# Generate app key
+RUN php artisan key:generate --ansi || true
+
+# Set permissions
+RUN chmod -R 775 storage bootstrap/cache
+
+# Expose port
+EXPOSE $PORT
+
+# Start Laravel development server
+CMD php artisan serve --host=0.0.0.0 --port=$PORT
 
