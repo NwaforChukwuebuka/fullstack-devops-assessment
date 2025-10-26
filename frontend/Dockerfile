@@ -35,6 +35,6 @@ COPY nginx.conf /etc/nginx/templates/default.conf.template
 # Expose port from Railway
 EXPOSE $PORT
 
-# Start Nginx on dynamic port - use envsubst for proper substitution
-CMD ["sh", "-c", "envsubst '$$PORT' < /etc/nginx/templates/default.conf.template | sed 's/__PORT__/'"'"'"$PORT"'"'"'/g' > /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'"]
+# Start Nginx - replace PORT placeholder with actual port
+CMD ["sh", "-c", "sed \"s/PORT/$PORT/g\" /etc/nginx/templates/default.conf.template > /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'"]
 
