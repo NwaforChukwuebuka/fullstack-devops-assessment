@@ -87,9 +87,32 @@ VITE_API_BASE_URL=http://localhost/api
 
 ## Live Deployment
 
-**URL**: [Deployment URL will be added]
-**Platform**: Railway.app
-**Status**: In progress
+**Frontend**: https://fullstack-devops-assessment-production.up.railway.app  
+**Backend API**: https://devops-backend.up.railway.app  
+**Platform**: Railway.app  
+**Status**: ✅ Deployed and running
+
+### Railway Deployment Notes
+- Frontend: React app served via nginx on port 8080
+- Backend: Laravel 10 API with MySQL database
+- Database: Railway MySQL service (internal connection)
+- Environment: Production
+
+### Environment Configuration
+The backend requires these environment variables in Railway:
+```
+DB_CONNECTION=mysql
+DB_HOST=mysql.railway.internal
+DB_PORT=3306
+DB_DATABASE=railway
+DB_USERNAME=root
+DB_PASSWORD=<provided-by-railway>
+```
+
+The frontend requires:
+```
+VITE_API_BASE_URL=https://devops-backend.up.railway.app/api
+```
 
 ## Development
 
