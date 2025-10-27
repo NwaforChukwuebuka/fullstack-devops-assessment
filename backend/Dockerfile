@@ -46,9 +46,6 @@ RUN php artisan key:generate --ansi --force || true
 COPY docker-entrypoint.sh /docker-entrypoint.sh
 RUN chmod +x /docker-entrypoint.sh
 
-# Run database migrations
-RUN php artisan migrate --force || true
-
 # Expose port
 EXPOSE $PORT
 
