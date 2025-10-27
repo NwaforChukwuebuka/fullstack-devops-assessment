@@ -31,8 +31,10 @@ if (initialState.token) {
 
 export const registerUser = createAsyncThunk(
   'auth/register',
-  async (credentials: { name: string; email: string; password: string; password_confirmation: string }) => {
-    const response = await axios.post('/register', credentials);
+  async (credentials: { name: string; email: string; password: string; password_confirmation?: string }) => {
+    // Remove password_confirmation before sending to backend
+    const { password_confirmation, ...backendCredentials } = credentials;
+    const response = await axios.post('/register', backendCredentials);
     return response.data;
   }
 );
