@@ -66,6 +66,18 @@ class Handler extends ExceptionHandler
             'trace' => $exception->getTraceAsString(),
         ]);
 
+        // For API requests, return detailed JSON error responses
+        if ($request->expectsJson() || $request->is('api/*')) {
+            return response()->json([
+                'success' => false,
+                'message' => $exception->getMessage(),
+                'error' => get_class($exception),
+                'file' => $exception->getFile(),
+                'line' => $exception->getLine(),
+                'trace' => config('app.debug') ? $exception->getTrace() : null,
+            ], 500);
+        }
+
         return parent::render($request, $exception);
     }
 }
