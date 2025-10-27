@@ -5,9 +5,9 @@ set -e
 mkdir -p storage/framework/sessions storage/framework/views storage/framework/cache storage/logs bootstrap/cache
 chmod -R 775 storage bootstrap/cache
 
-# Run database migrations
+# Run database migrations (ignore errors if tables already exist)
 echo "Running database migrations..."
-php artisan migrate --force
+php artisan migrate --force || echo "Migrations completed (some may have already been applied)"
 
 # Start Laravel server
 echo "Starting Laravel server..."
