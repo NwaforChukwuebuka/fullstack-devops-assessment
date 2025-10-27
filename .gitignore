@@ -27,3 +27,10 @@ build/
 .DS_Store
 Thumbs.db
 
+# Sensitive documentation files with credentials
+CONFIGURE_RAILWAY_NOW.md
+COPY_THESE_TO_RAILWAY.txt
+QUICK_SETUP.md
+RAILWAY_BACKEND_TROUBLESHOOTING.md
+RAILWAY_ENV_SETUP.md
+test-backend.sh
