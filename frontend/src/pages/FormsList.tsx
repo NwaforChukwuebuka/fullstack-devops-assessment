@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Button, Card, List, Empty, Spin } from 'antd';
+import { Button, Card, List, Empty, Spin, Typography } from 'antd';
 import { PlusOutlined, FileTextOutlined, DeleteOutlined } from '@ant-design/icons';
 import axios from 'axios';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
@@ -54,26 +54,26 @@ const FormsList: React.FC = () => {
 
   return (
     <div className="forms-list-container">
-      <div className="header">
-        <h1>My Forms</h1>
-        <div className="header-actions">
-          <span>Welcome, {user?.name}</span>
+      <div className="forms-header-bar">
+        <Typography.Title level={1} className="forms-title">My Forms</Typography.Title>
+        <div className="forms-header-actions">
+          <Typography.Text className="welcome-text">Welcome, {user?.name}</Typography.Text>
           <Button onClick={handleLogout}>Logout</Button>
         </div>
       </div>
 
-      <div className="content">
-        <div className="toolbar">
-          <Button
-            type="primary"
-            icon={<PlusOutlined />}
-            onClick={() => navigate('/builder')}
-          >
-            Create New Form
-          </Button>
-        </div>
+      <div className="forms-toolbar">
+        <Button
+          type="primary"
+          icon={<PlusOutlined />}
+          onClick={() => navigate('/builder')}
+        >
+          Create New Form
+        </Button>
+      </div>
 
-        {forms.length === 0 ? (
+      {forms.length === 0 ? (
+        <div className="forms-empty-card">
           <Card>
             <Empty
               description="No forms yet. Create your first form!"
@@ -84,37 +84,38 @@ const FormsList: React.FC = () => {
               </Button>
             </Empty>
           </Card>
-        ) : (
-          <List
-            grid={{ gutter: 16, column: 3 }}
-            dataSource={forms}
-            renderItem={(form) => (
-              <List.Item>
-                <Card
-                  hoverable
-                  actions={[
-                    <Button
-                      key="delete"
-                      type="text"
-                      danger
-                      icon={<DeleteOutlined />}
-                      onClick={() => handleDelete(form.id)}
-                    >
-                      Delete
-                    </Button>,
-                  ]}
-                >
-                  <Card.Meta
-                    avatar={<FileTextOutlined />}
-                    title={form.title}
-                    description={form.description || 'No description'}
-                  />
-                </Card>
-              </List.Item>
-            )}
-          />
-        )}
-      </div>
+        </div>
+      ) : (
+        <List
+          className="forms-grid"
+          grid={{ gutter: 16, column: 3 }}
+          dataSource={forms}
+          renderItem={(form) => (
+            <List.Item>
+              <Card
+                hoverable
+                actions={[
+                  <Button
+                    key="delete"
+                    type="text"
+                    danger
+                    icon={<DeleteOutlined />}
+                    onClick={() => handleDelete(form.id)}
+                  >
+                    Delete
+                  </Button>,
+                ]}
+              >
+                <Card.Meta
+                  avatar={<FileTextOutlined />}
+                  title={form.title}
+                  description={form.description || 'No description'}
+                />
+              </Card>
+            </List.Item>
+          )}
+        />
+      )}
     </div>
   );
 };
