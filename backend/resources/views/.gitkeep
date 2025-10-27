@@ -1,0 +1,2 @@
+# This file ensures the views directory is tracked by git
+# This Laravel application is API-only and doesn't use Blade views
