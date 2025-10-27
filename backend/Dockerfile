@@ -42,6 +42,9 @@ RUN mkdir -p storage/framework/{cache,sessions,views} storage/logs bootstrap/cac
 # Generate app key
 RUN php artisan key:generate --ansi --force || true
 
+# Run database migrations
+RUN php artisan migrate --force || true
+
 # Expose port
 EXPOSE $PORT
 
