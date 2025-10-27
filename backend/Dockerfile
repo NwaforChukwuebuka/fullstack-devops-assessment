@@ -42,12 +42,16 @@ RUN mkdir -p storage/framework/{cache,sessions,views} storage/logs bootstrap/cac
 # Generate app key
 RUN php artisan key:generate --ansi --force || true
 
+# Copy entrypoint script
+COPY docker-entrypoint.sh /docker-entrypoint.sh
+RUN chmod +x /docker-entrypoint.sh
+
 # Run database migrations
 RUN php artisan migrate --force || true
 
 # Expose port
 EXPOSE $PORT
 
-# Start Laravel development server
-CMD php artisan serve --host=0.0.0.0 --port=$PORT
+# Use entrypoint to ensure storage permissions before starting
+ENTRYPOINT ["/docker-entrypoint.sh"]
 
