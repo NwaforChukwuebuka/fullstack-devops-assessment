@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Form, Input, Button, message } from 'antd';
+import { Form, Input, Button, App } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { loginUser } from '../store/slices/authSlice';
@@ -10,6 +10,7 @@ const Login: React.FC = () => {
   const navigate = useNavigate();
   const { loading } = useAppSelector((state: any) => state.auth);
   const [error, setError] = useState('');
+  const { message } = App.useApp();
 
   const onFinish = async (values: { email: string; password: string }) => {
     try {

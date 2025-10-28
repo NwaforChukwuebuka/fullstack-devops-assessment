@@ -155,6 +155,15 @@ const formSlice = createSlice({
         }
       }
     },
+    reorderGroups: (
+      state,
+      action: PayloadAction<{ sectionId: string; groups: Group[] }>
+    ) => {
+      const section = state.currentForm.sections.find(s => s.id === action.payload.sectionId);
+      if (section) {
+        section.groups = action.payload.groups;
+      }
+    },
     loadForm: (state, action: PayloadAction<any>) => {
       state.currentForm = action.payload;
     },
@@ -194,6 +203,7 @@ export const {
   removeField,
   reorderSections,
   reorderFields,
+  reorderGroups,
   loadForm,
   resetForm,
 } = formSlice.actions;

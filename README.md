@@ -21,13 +21,15 @@ A complete Dynamic Form Builder application with React frontend, Laravel backend
 
 ## Features
 
-- User authentication (register/login)
-- Drag-and-drop form builder
-- Multiple field types (text, radio, checkbox, file upload, dropdown)
-- Form sections and groups organization
-- Save and retrieve forms via API
-- Docker containerization
-- CI/CD pipeline with GitHub Actions
+- **Interactive Form Builder**: Drag-and-drop interface with visual form previews
+- **Inline Editing**: Click to edit field labels, options, and properties directly
+- **Multiple Field Types**: Text input, radio buttons, checkboxes, file uploads, dropdowns
+- **Reordering**: Drag to reorder fields within groups using intuitive drag handles
+- **User Authentication**: Register, login, and manage your forms securely
+- **Form Management**: Save, update, and retrieve forms via RESTful API
+- **Modern UI**: Clean, responsive design with smooth animations
+- **Containerized**: Docker setup for easy local development
+- **CI/CD**: Automated deployment pipeline with GitHub Actions
 
 ## Quick Start with Docker
 
@@ -87,32 +89,23 @@ VITE_API_BASE_URL=http://localhost/api
 
 ## Live Deployment
 
-**Frontend**: https://fullstack-devops-assessment-production.up.railway.app  
+**Frontend**: https://formx.up.railway.app/  
 **Backend API**: https://devops-backend.up.railway.app  
 **Platform**: Railway.app  
 **Status**: ✅ Deployed and running
 
+### Recent Updates
+- ✨ **Enhanced Form Builder**: Complete redesign with inline editing
+- 🎨 **Visual Form Previews**: See exactly how fields will look
+- 🔄 **Drag & Drop Reordering**: Easily rearrange fields within groups
+- ✏️ **Inline Editing**: Click to edit labels and options directly
+- 🎯 **Improved UX**: Single canvas interface, smooth transitions
+
 ### Railway Deployment Notes
-- Frontend: React app served via nginx on port 8080
+- Frontend: React app served via nginx (https://formx.up.railway.app/)
 - Backend: Laravel 10 API with MySQL database
 - Database: Railway MySQL service (internal connection)
 - Environment: Production
-
-### Environment Configuration
-The backend requires these environment variables in Railway:
-```
-DB_CONNECTION=mysql
-DB_HOST=mysql.railway.internal
-DB_PORT=3306
-DB_DATABASE=railway
-DB_USERNAME=root
-DB_PASSWORD=<provided-by-railway>
-```
-
-The frontend requires:
-```
-VITE_API_BASE_URL=https://devops-backend.up.railway.app/api
-```
 
 ## Development
 

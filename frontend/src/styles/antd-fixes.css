@@ -1,0 +1,103 @@
+/* Fix for Ant Design v5 with React 18 */
+:where(.css-dev-only-do-not-override-1adbn6x).ant-btn,
+.ant-btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+:where(.css-dev-only-do-not-override-1adbn6x).ant-btn > .anticon,
+.ant-btn > .anticon {
+  line-height: 1;
+}
+
+/* Fix for message component */
+.ant-message-notice {
+  padding: 8px;
+  text-align: center;
+}
+
+/* Fix for form builder specific styles */
+.builder-content {
+  display: flex;
+  height: 100%;
+}
+
+.builder-sidebar {
+  width: 280px;
+  border-left: 1px solid #e8e8e8;
+}
+
+/* Fix for input styles */
+.ant-input {
+  border-color: #d9d9d9 !important;
+}
+
+.ant-input:focus,
+.ant-input-focused {
+  border-color: #40a9ff !important;
+  box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2) !important;
+}
+
+/* Fix for card styles */
+.ant-card {
+  border-radius: 8px !important;
+}
+
+.ant-card-head {
+  border-top-left-radius: 8px !important;
+  border-top-right-radius: 8px !important;
+}
+
+/* Fix for Tailwind and Ant Design conflicts */
+.ant-btn.ant-btn-primary {
+  background-color: #1890ff !important;
+}
+
+.ant-btn.ant-btn-primary:hover {
+  background-color: #40a9ff !important;
+}
+
+/* Fix for form builder layout */
+.ant-form-item {
+  margin-bottom: 16px !important;
+}
+
+/* Fix for drag and drop */
+[data-dragging="true"] {
+  opacity: 0.5;
+  cursor: grabbing !important;
+}
+
+/* Fix for Tailwind purging Ant Design styles */
+.ant-dropdown-menu-item,
+.ant-dropdown-menu-submenu-title {
+  clear: both;
+  margin: 0;
+  padding: 5px 12px;
+  color: rgba(0, 0, 0, 0.85);
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 22px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+/* Fix for form builder specific styles */
+.form-builder-section {
+  margin-bottom: 16px;
+  border: 1px solid #f0f0f0;
+  border-radius: 8px;
+}
+
+.form-builder-field {
+  padding: 8px;
+  margin-bottom: 8px;
+  border: 1px solid #f0f0f0;
+  border-radius: 4px;
+}
+
+/* Fix for DnD Kit styles */
+.sortable-item {
+  touch-action: none;
+}

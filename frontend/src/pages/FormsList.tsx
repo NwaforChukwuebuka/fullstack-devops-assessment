@@ -1,10 +1,11 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button, Card, List, Empty, Spin, Typography } from 'antd';
-import { PlusOutlined, FileTextOutlined, DeleteOutlined } from '@ant-design/icons';
+import { PlusOutlined, FileTextOutlined, DeleteOutlined, EditOutlined } from '@ant-design/icons';
 import axios from 'axios';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { logoutUser } from '../store/slices/authSlice';
+import { loadForm } from '../store/slices/formSlice';
 
 const FormsList: React.FC = () => {
   const navigate = useNavigate();
@@ -27,6 +28,18 @@ const FormsList: React.FC = () => {
       console.error('Error fetching forms:', error);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleEdit = async (id: string) => {
+    try {
+      const response = await axios.get(`/forms/${id}`);
+      if (response.data.success) {
+        dispatch(loadForm(response.data.data));
+        navigate(`/builder/${id}`);
+      }
+    } catch (error) {
+      console.error('Error loading form:', error);
     }
   };
 
@@ -70,6 +83,9 @@ const FormsList: React.FC = () => {
         >
           Create New Form
         </Button>
+        <Button style={{ marginLeft: 8 }} onClick={() => navigate('/style-guide')}>
+          Style Guide
+        </Button>
       </div>
 
       {forms.length === 0 ? (
@@ -95,6 +111,14 @@ const FormsList: React.FC = () => {
               <Card
                 hoverable
                 actions={[
+                  <Button
+                    key="edit"
+                    type="text"
+                    icon={<EditOutlined />}
+                    onClick={() => handleEdit(form.id)}
+                  >
+                    Edit
+                  </Button>,
                   <Button
                     key="delete"
                     type="text"

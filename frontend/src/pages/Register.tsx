@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Form, Input, Button, message } from 'antd';
+import { Form, Input, Button, App } from 'antd';
 import { UserOutlined, LockOutlined, MailOutlined } from '@ant-design/icons';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { registerUser } from '../store/slices/authSlice';
@@ -10,6 +10,7 @@ const Register: React.FC = () => {
   const navigate = useNavigate();
   const { loading } = useAppSelector((state: any) => state.auth);
   const [error, setError] = useState('');
+  const { message } = App.useApp();
 
   const onFinish = async (values: {
     name: string;

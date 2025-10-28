@@ -34,3 +34,20 @@ QUICK_SETUP.md
 RAILWAY_BACKEND_TROUBLESHOOTING.md
 RAILWAY_ENV_SETUP.md
 test-backend.sh
+
+# Temporary deployment and debugging files
+DEPLOYMENT_SUCCESS.md
+DEPLOYMENT_SUMMARY.md
+DEPLOYMENT_FIX.md
+RAILWAY_DEPLOYMENT_CHECKLIST.md
+RAILWAY_FIX.md
+RAILWAY_README.md
+PUSH_TO_GITHUB.md
+DEPLOY_TO_RAILWAY.md
+HOW_TO_RUN.md
+install-backend.sh
+*.pdf:Zone.Identifier
+error.md
+
+# UI assets and design files
+ui/
