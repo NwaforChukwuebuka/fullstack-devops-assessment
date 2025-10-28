@@ -189,7 +189,7 @@ const FormBuilder: React.FC = () => {
                     placeholder="Form Title"
                     value={currentForm.title}
                     onChange={(e) => dispatch(setFormTitle(e.target.value))}
-                    style={{ width: '320px', border: 'none', fontSize: '16px', fontWeight: '600' }}
+                    style={{ width: '320px', fontSize: '16px', fontWeight: '600', border: '1px solid #d1d5db' }}
                     className="text-gray-900"
                   />
                 </div>
